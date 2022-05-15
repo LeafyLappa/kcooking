@@ -46,7 +46,7 @@ class StreakText(text: String) : Text(text) {
         Stage(36, "!!!", rainbowColors, 50L),
         Stage(40, "", rainbowColors, 50L, "ENORMOUS"),
         Stage(46, "", rainbowColors, 50L, "LEGENDARY"),
-        Stage(52, "", rainbowColors, 50L, "INCALCULABLE"),
+        Stage(52, "", rainbowColors, 50L, "EXTREME"),
         Stage(58, "", rainbowColors, 50L, "UNFATHOMABLE"),
         Stage(64, "", rainbowColors, 50L, "TRANSCENDENTAL"),
         Stage(70, "", rainbowColors, 50L, "INFINITE"),

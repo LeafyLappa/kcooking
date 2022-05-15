@@ -20,6 +20,10 @@ class MainMenuScreen(
             Menu.Item("Start cooking!") {
                 navigator.navigateTo<GameScreen>()
             },
+            Menu.Item("Mode: ${viewModel.difficulty}") {
+                viewModel.updateDifficulty()
+                it.text = "Mode: ${viewModel.difficulty}"
+            },
             Menu.Item("About KCooking") {
                 navigator.navigateTo<AboutScreen>()
             },

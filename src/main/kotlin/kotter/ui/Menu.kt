@@ -11,7 +11,7 @@ open class Menu(
     private val border: Border? = null,
 ) : Renderable {
 
-    data class Item(var text: String, val onSubmit: () -> Unit)
+    data class Item(var text: String, val submit: (Item) -> Unit)
 
     private var selectedItemIndex = -1
 
@@ -38,7 +38,9 @@ open class Menu(
     }
 
     fun submit() {
-        items[selectedItemIndex].onSubmit()
+        items[selectedItemIndex].let {
+            it.submit(it)
+        }
     }
 
     private fun RenderScope.drawItems() {

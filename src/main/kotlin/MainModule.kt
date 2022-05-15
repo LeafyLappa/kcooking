@@ -1,3 +1,4 @@
+import gameplay.GameplayModule
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotter.UserInterface
@@ -17,4 +18,6 @@ val MainModule = module {
     includes(MainLoadingModule)
     includes(AboutModule)
     includes(GameScreenModule)
+
+    includes(GameplayModule)
 }
