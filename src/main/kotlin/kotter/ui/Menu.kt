@@ -3,21 +3,26 @@ package kotter.ui
 import com.varabyte.kotter.foundation.text.textLine
 import com.varabyte.kotter.foundation.text.yellow
 import com.varabyte.kotter.runtime.MainRenderScope
-import com.varabyte.kotterx.decorations.BorderCharacters
+import com.varabyte.kotter.runtime.render.RenderScope
 import com.varabyte.kotterx.decorations.bordered
 
-class Menu(private vararg val items: Item) {
-    data class Item(val text: String, val onConfirm: () -> Unit)
+open class Menu(
+    private val items: Array<Item>,
+    private val border: Border? = null,
+) : Renderable {
 
-    private var selectedItemIndex = 0
+    data class Item(var text: String, val onSubmit: () -> Unit)
 
-    fun render(scope: MainRenderScope) {
-        scope.bordered(BorderCharacters.ASCII, 3, 3) {
-            items.forEachIndexed { index: Int, item: Item ->
-                if (index != selectedItemIndex) textLine(item.text)
-                else yellow { textLine(item.text) }
-            }
-        }
+    private var selectedItemIndex = -1
+
+    override fun render(scope: MainRenderScope) {
+        if (border != null) scope.bordered(
+            border.borderCharacters,
+            border.paddingLeftRight,
+            border.paddingTopBottom,
+        ) {
+            drawItems()
+        } else scope.drawItems()
     }
 
     fun selectNext() {
@@ -28,7 +33,18 @@ class Menu(private vararg val items: Item) {
         selectedItemIndex = (selectedItemIndex - 1).coerceAtLeast(0)
     }
 
-    fun confirm() {
-        items[selectedItemIndex].onConfirm()
+    fun selectAt(index: Int) {
+        selectedItemIndex = index.coerceAtLeast(0).coerceAtMost(items.size - 1)
+    }
+
+    fun submit() {
+        items[selectedItemIndex].onSubmit()
+    }
+
+    private fun RenderScope.drawItems() {
+        items.forEachIndexed { index: Int, item: Item ->
+            if (index != selectedItemIndex) textLine(item.text)
+            else yellow { textLine(item.text) }
+        }
     }
 }

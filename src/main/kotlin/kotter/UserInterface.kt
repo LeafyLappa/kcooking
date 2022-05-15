@@ -18,6 +18,7 @@ class UserInterface {
     val navigator = object : Navigator() {
         override fun navigate(screen: Screen) {
             currentScreen = screen
+            screen.onNavigate()
         }
 
         override fun leave() {
@@ -42,7 +43,6 @@ class UserInterface {
                 onKeyPressed {
                     currentScreen.onKeyPressed(key)
                 }
-                currentScreen.onRun()
                 CoroutineScope(renderJob).launch {
                     tickWhile(::isActive) {
                         rerender()

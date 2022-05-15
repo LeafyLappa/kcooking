@@ -8,7 +8,7 @@ import org.koin.core.component.inject
 abstract class Screen : KoinComponent {
     abstract fun draw(scope: MainRenderScope)
     open fun onKeyPressed(key: Key) = Unit
-    open fun onRun() = Unit
+    open fun onNavigate() = Unit
 
     protected val navigator: Navigator by inject()
 }
