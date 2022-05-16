@@ -2,7 +2,6 @@ package kotter.ui
 
 import com.varabyte.kotter.foundation.text.textLine
 import com.varabyte.kotter.foundation.text.yellow
-import com.varabyte.kotter.runtime.MainRenderScope
 import com.varabyte.kotter.runtime.render.RenderScope
 import com.varabyte.kotterx.decorations.bordered
 
@@ -15,7 +14,7 @@ open class Menu(
 
     private var selectedItemIndex = -1
 
-    override fun render(scope: MainRenderScope) {
+    override fun render(scope: RenderScope) {
         if (border != null) scope.bordered(
             border.borderCharacters,
             border.paddingLeftRight,
